@@ -4,7 +4,7 @@ const createImagesStyle = require('./lib/create-images-style');
 
 const config = {
   baseDir: "/Users/***/InVision/***@****.com/your_project_name/Assets/Source Files", //psdが入っているルートディレクトリ(google driveの)
-  psdNames: ["test"], //対象psdリスト
+  psdNames: ["01_Home", "01_Home_sp"], //対象psdリスト
   imageDirName: "img", //psd書き出すときの対象フォルダ名(画像)
   spriteDirName: "sprite", //psd書き出すときの対象フォルダ名(sprite)
   imageDestPath: "source/assets/img", //画像吐き出し先
@@ -19,5 +19,3 @@ const main = ()=>{
 }
 
 main();
-
-

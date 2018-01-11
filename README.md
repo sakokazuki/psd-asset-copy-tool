@@ -19,9 +19,13 @@ invision sync、google drive等でデザイナー、デベロッパーが同じ�
 
 デザイナーが初稿のデザインファイルをあげたら普通はデベロッパーがアセット書き出し用に
 こんな感じで名前つける。
+
 <img src="images/image01.png" width="300px">
+
 これをアセット書き出しにチェックを入れると
+
 <img src="images/image02.png" width="300px">
+
 こんな感じで一式書き出される。
 
 このxxxx-assets以下も含めて共有フォルダで共有する。
@@ -33,6 +37,7 @@ invision sync、google drive等でデザイナー、デベロッパーが同じ�
 
 デベロッパーが書き出すファイルの命名規則として基本は
 画像は`img/hoge.jpg`、スプライトは`sprite/hoge.png`とする。
+※一応設定で変更できる。
 
 # how to use
 
@@ -48,6 +53,39 @@ async/awaitとかつかってるのでnode.js v8~じゃないと動かない気�
 package.jsonにnpm scriptsでもつくって
 各自の環境でビルド前に一回実行するみたいなのつくるか
 
+## stylusファイル
+
+### 画像の場合
+
+```
+$imagename_width = 341px
+$imagename_height = 300px
+$imagename_width_x2 = 170.5px
+$imagename_height_x2 = 150px
+$imagename = 341px 300px 170.5px 150px
+
+imageSize($image)
+  width: $image[0]
+  height: $image[1]
+
+imageSizeX2($image)
+  width: $image[2]
+  height: $image[3]
+```
+
+```
+.hoge
+  position: relative
+  img
+    imageSize($imagename)  
+```
+的なノリで使う。
+
+### スプライトシートの場合
+spritesmith(https://github.com/Ensighten/spritesmith)つかったので
+こっちを参考に。
+
+spritesmithにはretina用のmixinが入ったstylusが書き出されないのでそれだけオリジナルで書き出した。
 
 ## config
 
@@ -55,8 +93,8 @@ package.jsonにnpm scriptsでもつくって
 
 ```
 const config = {
-  baseDir: "/Users/kazukisako/Documents/_eclipse/web-tool/design", //psdが入っているルートディレクトリ
-  psdNames: ["02_Home", "02_Home_sp"], //対象psdリスト
+  baseDir: "/Users/***/InVision/***@****.com/your_project_name/Assets/Source Files", //psdが入っているルートディレクトリ(google driveの)
+  psdNames: ["01_Home", "01_Home_sp"], //対象psdリスト
   imageDirName: "img", //psd書き出すときの対象フォルダ名(画像)
   spriteDirName: "sprite", //psd書き出すときの対象フォルダ名(sprite)
   imageDestPath: "source/assets/img", //画像吐き出し先
